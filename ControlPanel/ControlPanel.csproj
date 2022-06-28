@@ -27,6 +27,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ControlPanel.DAL\ControlPanel.DAL.csproj" />
+    <ProjectReference Include="..\ControlPanel.IRepos\ControlPanel.IRepos.csproj" />
+    <ProjectReference Include="..\ControlPanel.Repos\ControlPanel.Repos.csproj" />
   </ItemGroup>
 
 </Project>

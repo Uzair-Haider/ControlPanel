@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ControlPanel.IRepos\ControlPanel.IRepos.csproj" />
+  </ItemGroup>
+
 </Project>

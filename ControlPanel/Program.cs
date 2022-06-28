@@ -1,4 +1,6 @@
 using ControlPanel.DAL;
+using ControlPanel.IRepos;
+using ControlPanel.Repos.UserRepo;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +17,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddTransient<IUserCreateRepo, UserCreateRepo>();
 string connectionString = builder.Configuration.GetConnectionString("ControlPanelDb");
 builder.Services.AddDbContext<CPContext>(x => x.UseSqlServer(connectionString));
 
