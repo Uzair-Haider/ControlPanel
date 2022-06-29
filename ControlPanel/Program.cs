@@ -1,4 +1,5 @@
 using ControlPanel.DAL;
+using ControlPanel.Entities;
 using ControlPanel.IRepos;
 using ControlPanel.IRepos.IAddressRepo;
 using ControlPanel.IRepos.IUserAccountRepo;
@@ -34,7 +35,7 @@ string connectionString = builder.Configuration.GetConnectionString("ControlPane
 builder.Services.AddDbContext<CPContext>(x => x.UseSqlServer(connectionString));
 
 // For Identity
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+builder.Services.AddIdentity<User, ApplicationRole>()
     .AddEntityFrameworkStores<CPContext>()
     .AddDefaultTokenProviders();
 

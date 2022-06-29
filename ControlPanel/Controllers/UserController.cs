@@ -64,6 +64,7 @@ namespace ControlPanel.Controllers
 
         [HttpPost]
         [Route("register")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<IActionResult> Register([FromBody] UserVM model)
         {
             var userExists = await _userManager.FindByNameAsync(model.UserName);
@@ -85,6 +86,7 @@ namespace ControlPanel.Controllers
 
         [HttpPost]
         [Route("register-admin")]
+        [Authorize(Roles =UserRoles.Admin)]
         public async Task<IActionResult> RegisterAdmin([FromBody] UserVM model)
         {
             var userExists = await _userManager.FindByNameAsync(model.UserName);

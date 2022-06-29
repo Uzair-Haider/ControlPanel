@@ -10,13 +10,17 @@ using System.Threading.Tasks;
 
 namespace ControlPanel.DAL
 {
-    public class CPContext : IdentityDbContext<IdentityUser>
+    public class CPContext : IdentityDbContext<User, ApplicationRole, Guid>
     {
         public CPContext(DbContextOptions<CPContext> options) : base(options)
         {
         }
-        public DbSet<User> Users  { get; set; }
         public DbSet<UserAccount> UserAccounts  { get; set; }
         public DbSet<Address> Addresses  { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+        }
     }
 }

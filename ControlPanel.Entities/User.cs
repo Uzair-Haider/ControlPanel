@@ -1,15 +1,13 @@
 ﻿using Helpers.Enums;
+using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ControlPanel.Entities
 {
-    [Table("Users")]
-    public class User : BaseModel
+    public class User : IdentityUser<Guid>
     {
-        [Key]
-        public Guid UserId { get; set; }
-
+        
         [Required]
         [EmailAddress]
         public string Email { get; set; }
@@ -42,5 +40,9 @@ namespace ControlPanel.Entities
         /// </summary>
         [Required]
         public Gender Sex { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public DateTime? ModifiedOn { get; set; }
+        public Guid? CreatedBy { get; set; }
+        public Guid? ModifiedBy { get; set; }
     }
 }
