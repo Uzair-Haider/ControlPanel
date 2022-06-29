@@ -1,5 +1,10 @@
 using ControlPanel.DAL;
 using ControlPanel.IRepos;
+using ControlPanel.IRepos.IAddressRepo;
+using ControlPanel.IRepos.IUserAccountRepo;
+using ControlPanel.IRepos.IUserRepo;
+using ControlPanel.Repos.AddressRepo;
+using ControlPanel.Repos.UserAccountRepo;
 using ControlPanel.Repos.UserRepo;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -18,6 +23,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IUserCreateRepo, UserCreateRepo>();
+builder.Services.AddTransient<IUserAccountCreateRepo, UserAccountCreate>();
+builder.Services.AddTransient<IAddressCreate, AddressCreate>();
 string connectionString = builder.Configuration.GetConnectionString("ControlPanelDb");
 builder.Services.AddDbContext<CPContext>(x => x.UseSqlServer(connectionString));
 

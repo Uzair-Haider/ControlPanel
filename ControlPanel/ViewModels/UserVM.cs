@@ -1,15 +1,10 @@
 ﻿using Helpers.Enums;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ControlPanel.Entities
+namespace ControlPanel.ViewModels
 {
-    [Table("Users")]
-    public class User : BaseModel
+    public class UserVM
     {
-        [Key]
-        public Guid UserId { get; set; }
-
         [Required]
         [EmailAddress]
         public string Email { get; set; }
@@ -36,11 +31,5 @@ namespace ControlPanel.Entities
         /// </summary>
         [Required]
         public Gender Sex { get; set; }
-
-        public string Address1 { get; set; }
-        public string Country { get; set; }
-        public string City { get; set; }
-        public string Street { get; set; }
-        public string ZipCode { get; set; }
     }
 }

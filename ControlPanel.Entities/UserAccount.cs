@@ -17,9 +17,6 @@ namespace ControlPanel.Entities
         [ForeignKey("UserId")]
         public Guid UserId { get; set; }
         public virtual User User { get; set; }
-
-        [ForeignKey("AccountId")]
-        public Guid AccountId { get; set; }
-        public virtual Account Account { get; set; }
+        public string AccountName { get; set; }
     }
 }

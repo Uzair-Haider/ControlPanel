@@ -18,5 +18,9 @@ namespace ControlPanel.Entities
         public string City { get; set; }
         public string Street { get; set; }
         public string ZipCode { get; set; }
+
+        [ForeignKey("UserId")]
+        public Guid UserId { get; set; }
+        public virtual User User { get; set; }
     }
 }

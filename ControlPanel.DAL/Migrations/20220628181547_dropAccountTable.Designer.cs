@@ -4,6 +4,7 @@ using ControlPanel.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ControlPanel.DAL.Migrations
 {
     [DbContext(typeof(CPContext))]
-    partial class CPContextModelSnapshot : ModelSnapshot
+    [Migration("20220628181547_dropAccountTable")]
+    partial class dropAccountTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,16 +58,11 @@ namespace ControlPanel.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("ZipCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("AddressId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Addresses");
                 });
@@ -74,6 +71,9 @@ namespace ControlPanel.DAL.Migrations
                 {
                     b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AddressId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("CreatedBy")
@@ -122,6 +122,8 @@ namespace ControlPanel.DAL.Migrations
 
                     b.HasKey("UserId");
 
+                    b.HasIndex("AddressId");
+
                     b.ToTable("Users");
                 });
 
@@ -157,15 +159,15 @@ namespace ControlPanel.DAL.Migrations
                     b.ToTable("UserAccounts");
                 });
 
-            modelBuilder.Entity("ControlPanel.Entities.Address", b =>
+            modelBuilder.Entity("ControlPanel.Entities.User", b =>
                 {
-                    b.HasOne("ControlPanel.Entities.User", "User")
+                    b.HasOne("ControlPanel.Entities.Address", "Address")
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("Address");
                 });
 
             modelBuilder.Entity("ControlPanel.Entities.UserAccount", b =>

@@ -14,7 +14,6 @@ namespace ControlPanel.DAL
         {
         }
         public DbSet<User> Users  { get; set; }
-        public DbSet<Account> Accounts  { get; set; }
         public DbSet<UserAccount> UserAccounts  { get; set; }
         public DbSet<Address> Addresses  { get; set; }
     }
