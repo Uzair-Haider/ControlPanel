@@ -27,7 +27,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IUserCreateRepo, UserCreateRepo>();
-builder.Services.AddTransient<IUserAccountCreateRepo, UserAccountCreate>();
+builder.Services.AddTransient<IUserAccountCreate, UserAccountCreate>();
 builder.Services.AddTransient<IAddressCreate, AddressCreate>();
 builder.Services.AddScoped<IAddressCreate, AddressCreate>();
 
@@ -36,9 +36,30 @@ string connectionString = builder.Configuration.GetConnectionString("ControlPane
 builder.Services.AddDbContext<CPContext>(x => x.UseSqlServer(connectionString));
 
 // For Identity
-builder.Services.AddIdentity<User, ApplicationRole>()
+builder.Services.AddIdentity<User, ApplicationRole>(options =>
+{
+    // Password settings.
+    options.Password.RequireDigit = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequireUppercase = true;
+    options.Password.RequiredLength = 6;
+    options.Password.RequiredUniqueChars = 1;
+
+    // Lockout settings.
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+    options.Lockout.MaxFailedAccessAttempts = 5;
+    options.Lockout.AllowedForNewUsers = true;
+
+    // User settings.
+    options.User.AllowedUserNameCharacters =
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    options.User.RequireUniqueEmail = false;
+})
     .AddEntityFrameworkStores<CPContext>()
     .AddDefaultTokenProviders();
+
+
 
 
 // Adding Authentication

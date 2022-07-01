@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ControlPanel.Repos.UserAccountRepo
 {
-    public class UserAccountCreate : IUserAccountCreateRepo
+    public class UserAccountCreate : IUserAccountCreate
     {
         private readonly ILogger _logger;
         private readonly CPContext _db;

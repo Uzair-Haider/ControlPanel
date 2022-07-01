@@ -41,5 +41,7 @@ namespace ControlPanel.ViewModels
         public string City { get; set; }
         public string Street { get; set; }
         public string ZipCode { get; set; }
+
+        public List<string> AccountNames { get; set; }
     }
 }

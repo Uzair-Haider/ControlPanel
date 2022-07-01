@@ -9,8 +9,14 @@ namespace ControlPanel.Entities
 {
     public class ApplicationRole : IdentityRole<Guid>
     {
+        public ApplicationRole()
+        {
+        }
+
         public ApplicationRole(string roleName) : base(roleName)
         {
+            Name = roleName;
+            Description = roleName + $@" added on {DateTime.Now.ToShortDateString()}";
         }
 
         public string Description { get; set; }
