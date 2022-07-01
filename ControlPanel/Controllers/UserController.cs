@@ -1,3 +1,4 @@
+using ControlPanel.Entities;
 using ControlPanel.ViewModels;
 using Helpers;
 using Microsoft.AspNetCore.Authorization;
@@ -16,13 +17,13 @@ namespace ControlPanel.Controllers
     public class UserController : ControllerBase
     {
 
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly UserManager<User> _userManager;
+        private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly IConfiguration _configuration;
         private readonly ILogger<UserController> _logger;
 
-        public UserController(ILogger<UserController> logger, UserManager<IdentityUser> userManager,
-            RoleManager<IdentityRole> roleManager,
+        public UserController(ILogger<UserController> logger, UserManager<User> userManager,
+            RoleManager<ApplicationRole> roleManager,
             IConfiguration configuration)
         {
             _logger = logger;
@@ -71,7 +72,7 @@ namespace ControlPanel.Controllers
             if (userExists != null)
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
 
-            IdentityUser user = new()
+            User user = new()
             {
                 Email = model.Email,
                 SecurityStamp = Guid.NewGuid().ToString(),
@@ -86,14 +87,14 @@ namespace ControlPanel.Controllers
 
         [HttpPost]
         [Route("register-admin")]
-        [Authorize(Roles =UserRoles.Admin)]
+        //[Authorize(Roles =UserRoles.Admin)]
         public async Task<IActionResult> RegisterAdmin([FromBody] UserVM model)
         {
             var userExists = await _userManager.FindByNameAsync(model.UserName);
             if (userExists != null)
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
 
-            IdentityUser user = new()
+            User user = new()
             {
                 Email = model.Email,
                 SecurityStamp = Guid.NewGuid().ToString(),
@@ -104,9 +105,9 @@ namespace ControlPanel.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
 
             if (!await _roleManager.RoleExistsAsync(UserRoles.Admin))
-                await _roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+                await _roleManager.CreateAsync(new ApplicationRole(UserRoles.Admin));
             if (!await _roleManager.RoleExistsAsync(UserRoles.User))
-                await _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+                await _roleManager.CreateAsync(new ApplicationRole(UserRoles.User));
 
             if (await _roleManager.RoleExistsAsync(UserRoles.Admin))
             {

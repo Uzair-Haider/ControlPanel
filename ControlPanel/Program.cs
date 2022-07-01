@@ -29,6 +29,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IUserCreateRepo, UserCreateRepo>();
 builder.Services.AddTransient<IUserAccountCreateRepo, UserAccountCreate>();
 builder.Services.AddTransient<IAddressCreate, AddressCreate>();
+builder.Services.AddScoped<IAddressCreate, AddressCreate>();
 
 // For Entity Framework
 string connectionString = builder.Configuration.GetConnectionString("ControlPanelDb");
