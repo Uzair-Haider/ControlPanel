@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace ControlPanel.IRepos.IUserRepo
 {
-    public interface IUserCreateRepo
+    public interface IUserRetrieve
     {
-        void CreateUser(User user);
+        Task<IQueryable<User>> GetAllUser(string search,string orderBy,string orderOn);
     }
 }

@@ -26,9 +26,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddTransient<IUserCreateRepo, UserCreateRepo>();
+builder.Services.AddTransient<IUserCreate, UserCreate>();
 builder.Services.AddTransient<IUserAccountCreate, UserAccountCreate>();
 builder.Services.AddTransient<IAddressCreate, AddressCreate>();
+builder.Services.AddTransient<IUserRetrieve, UserRetrieve>();
 builder.Services.AddScoped<IAddressCreate, AddressCreate>();
 
 // For Entity Framework

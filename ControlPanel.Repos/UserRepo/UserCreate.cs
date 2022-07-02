@@ -6,11 +6,11 @@ using Microsoft.Extensions.Logging;
 
 namespace ControlPanel.Repos.UserRepo
 {
-    public class UserCreateRepo : IUserCreateRepo
+    public class UserCreate : IUserCreate
     {
         private readonly ILogger _logger;
         private readonly CPContext _db;
-        public UserCreateRepo(ILogger<UserCreateRepo> logger, CPContext db)
+        public UserCreate(ILogger<UserCreate> logger, CPContext db)
         {
             _logger = logger;
             _db = db;

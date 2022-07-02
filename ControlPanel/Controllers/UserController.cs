@@ -1,6 +1,7 @@
 using ControlPanel.Entities;
 using ControlPanel.IRepos.IAddressRepo;
 using ControlPanel.IRepos.IUserAccountRepo;
+using ControlPanel.IRepos.IUserRepo;
 using ControlPanel.ViewModels;
 using Helpers;
 using Microsoft.AspNetCore.Authorization;
@@ -11,6 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using X.PagedList;
 
 namespace ControlPanel.Controllers
 {
@@ -24,11 +26,12 @@ namespace ControlPanel.Controllers
         private readonly IConfiguration _configuration;
         private readonly IUserAccountCreate _userAccountCreate;
         private readonly IAddressCreate _addressCreate;
+        private readonly IUserRetrieve _userRetrieve;
         private readonly ILogger<UserController> _logger;
 
         public UserController(ILogger<UserController> logger, UserManager<User> userManager,
             RoleManager<ApplicationRole> roleManager,
-            IConfiguration configuration, IUserAccountCreate userAccountCreate, IAddressCreate addressCreate)
+            IConfiguration configuration, IUserAccountCreate userAccountCreate, IAddressCreate addressCreate, IUserRetrieve userRetrieve)
         {
             _logger = logger;
             _userManager = userManager;
@@ -36,6 +39,7 @@ namespace ControlPanel.Controllers
             _configuration = configuration;
             _userAccountCreate = userAccountCreate;
             _addressCreate = addressCreate;
+            _userRetrieve = userRetrieve;
         }
 
         [HttpPost]
@@ -223,6 +227,31 @@ namespace ControlPanel.Controllers
                 );
 
             return token;
+        }
+
+        [HttpGet]
+        [Route("get-users")]
+        [Authorize(Roles = UserRoles.Admin)]
+
+        public async Task<GetUsersVM> GetUsers(string search, string orderBy, string orderOn, int pageNumber = 1, int pageSize = 20)
+        {
+
+            GetUsersVM usersVM = new GetUsersVM();
+            try
+            {
+                IPagedList<User>? pagedList = await _userRetrieve.GetAllUser(search, orderBy, orderOn).Result.ToPagedListAsync(pageNumber, pageSize);
+                usersVM.users = pagedList.ToList();
+                usersVM.TotalCount = pagedList?.TotalItemCount ?? 0;
+                usersVM.PageCount = pagedList?.PageCount ?? 0;
+                usersVM.PageNumber = pagedList?.PageNumber ?? 0;
+                usersVM.PageSize = pagedList?.PageSize ?? 0;
+                usersVM.Count = pagedList?.Count ?? 0;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Exception occured in GetUsers");
+            }
+            return usersVM;
         }
     }
 }
