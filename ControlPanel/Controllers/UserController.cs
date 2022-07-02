@@ -186,11 +186,11 @@ namespace ControlPanel.Controllers
 
         private void CreateUserAccount(UserVM model, User user)
         {
-            foreach (var item in model.AccountNames)
+            foreach (var item in model.AccountNumber)
             {
                 UserAccount userAccount = new UserAccount()
                 {
-                    AccountName = item
+                    AccountNumber = item
                 };
                 _userAccountCreate.AccountCreate(user.Id, userAccount);
             }

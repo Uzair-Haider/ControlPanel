@@ -17,6 +17,8 @@ namespace ControlPanel.Entities
         [ForeignKey("UserId")]
         public Guid UserId { get; set; }
         public virtual User User { get; set; }
-        public string AccountName { get; set; }
+
+        [Required(ErrorMessage ="Account number is required")]
+        public string AccountNumber { get; set; }
     }
 }
