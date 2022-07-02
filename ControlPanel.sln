@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32602.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlPanel", "ControlPanel\ControlPanel.csproj", "{939747A3-6626-4908-B876-2CBECC12FB13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ControlPanel.Apis", "ControlPanel\ControlPanel.Apis.csproj", "{939747A3-6626-4908-B876-2CBECC12FB13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlPanel.Entities", "ControlPanel.Entities\ControlPanel.Entities.csproj", "{72FE9571-92CC-44D5-A32B-B24028703424}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ControlPanel.Entities", "ControlPanel.Entities\ControlPanel.Entities.csproj", "{72FE9571-92CC-44D5-A32B-B24028703424}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlPanel.DAL", "ControlPanel.DAL\ControlPanel.DAL.csproj", "{8446E768-54B8-45EC-94D1-73D5D2355B9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ControlPanel.DAL", "ControlPanel.DAL\ControlPanel.DAL.csproj", "{8446E768-54B8-45EC-94D1-73D5D2355B9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlPanel.Repos", "ControlPanel.Repos\ControlPanel.Repos.csproj", "{E5E1D50E-BFEB-4856-B69C-B1E41631DFF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ControlPanel.Repos", "ControlPanel.Repos\ControlPanel.Repos.csproj", "{E5E1D50E-BFEB-4856-B69C-B1E41631DFF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlPanel.IRepos", "ControlPanel.IRepos\ControlPanel.IRepos.csproj", "{8100FDAA-9611-4CEC-BAC1-2ED4909C14CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ControlPanel.IRepos", "ControlPanel.IRepos\ControlPanel.IRepos.csproj", "{8100FDAA-9611-4CEC-BAC1-2ED4909C14CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpers", "Helpers\Helpers.csproj", "{EE7A8084-6A43-4A96-918D-2B873FF4C7A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helpers", "Helpers\Helpers.csproj", "{EE7A8084-6A43-4A96-918D-2B873FF4C7A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
